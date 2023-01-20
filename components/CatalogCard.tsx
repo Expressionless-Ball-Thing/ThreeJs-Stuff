@@ -14,7 +14,7 @@ export default function CatalogCard() {
             href={`/stuff/stub`}
             className=" flex justify-center items-center w-full h-6 bg-gray-600 transform hover:scale-110 transition-all text-center rounded-lg"
           >
-            Hey
+            Link
           </Link>
           <Link
             href={`/commentary/stub`}
