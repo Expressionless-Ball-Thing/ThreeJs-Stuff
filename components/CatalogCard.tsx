@@ -24,15 +24,6 @@ export default function CatalogCard() {
           </Link>
         </div>
       </div>
-
-      {/* <button
-              aria-label="Toggle Dark Mode"
-              type="button"
-              className=" w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-300 transition-all"
-              onClick={() => {
-                setTheme(resolvedTheme === "dark" ? "light" : "dark");
-              }}
-            > */}
     </div>
   );
 }
