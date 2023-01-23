@@ -34,7 +34,7 @@ export default function Home() {
               Catalog
             </h3>
             <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <CatalogCard />
+              <CatalogCard stuffLink={"WordSphere"} commentaryLink={"stub"} title={"Words Sphere"} description={"Words displayed on the surface of a sphere, with added mouse rotate"} />
             </div>
           </div>
         </main>
