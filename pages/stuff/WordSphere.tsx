@@ -1,20 +1,46 @@
-import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { Html, Text } from "@react-three/drei";
+import { useRef } from "react";
+import { Html } from "@react-three/drei";
 import * as Utils from "three/examples/jsm/utils/BufferGeometryUtils";
-import ContainerWrapper from "../../components/ContainerWrapper";
 import useMeasure, { RectReadOnly } from "react-use-measure";
-import { MotionValue, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  MotionValue,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { motion } from "framer-motion-3d";
+import ThreeStuffBox from "../../components/layouts/stuff";
 
-const spring = {stiffness: 600, damping: 30};
+const spring = { stiffness: 600, damping: 30 };
 
-
-function Sphere({mouseX, mouseY, bounds} : {mouseX: MotionValue<number>, mouseY: MotionValue<number>, bounds:RectReadOnly}) {
+function Sphere({
+  mouseX,
+  mouseY,
+  bounds,
+}: {
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+  bounds: RectReadOnly;
+}) {
   const sphereRef = useRef<any>(null);
-  const sphereRotateY = useSpring(useTransform(mouseX, [-bounds.width, bounds.width], [-2*Math.PI, 2*Math.PI]), spring)
-  const sphereRotateZ = useSpring(useTransform(mouseY, [-bounds.height, bounds.height], [-2*Math.PI, 2*Math.PI]), spring)
+  const sphereRotateY = useSpring(
+    useTransform(
+      mouseX,
+      [-bounds.width, bounds.width],
+      [-2 * Math.PI, 2 * Math.PI]
+    ),
+    spring
+  );
+  const sphereRotateZ = useSpring(
+    useTransform(
+      mouseY,
+      [-bounds.height, bounds.height],
+      [-2 * Math.PI, 2 * Math.PI]
+    ),
+    spring
+  );
 
   // Apparent setting the tolerance to 1 somehow fixes it?
   const stuff = Utils.mergeVertices(new THREE.IcosahedronGeometry(2.1, 0), 1.1);
@@ -34,42 +60,45 @@ function Sphere({mouseX, mouseY, bounds} : {mouseX: MotionValue<number>, mouseY:
         center
       >
         {i}
-        <meshStandardMaterial side={THREE.DoubleSide}/>
+        <meshStandardMaterial side={THREE.DoubleSide} />
       </Html>
     );
   }
-  
+
   return (
-    <motion.group ref={sphereRef} rotation-y={sphereRotateY} rotation-z={sphereRotateZ}>
-    {textArray}
-    <mesh>
-      <icosahedronGeometry args={[2.1, 0]}/>
-      <meshBasicMaterial wireframe />
-    </mesh>
-    </motion.group>);
+    <motion.group
+      ref={sphereRef}
+      rotation-y={sphereRotateY}
+      rotation-z={sphereRotateZ}
+    >
+      {textArray}
+      <mesh>
+        <icosahedronGeometry args={[2.1, 0]} />
+        <meshBasicMaterial wireframe />
+      </mesh>
+    </motion.group>
+  );
 }
 
 export default function WordSphere() {
-
   // useMeasure for mouse stuff.
-  const [ref, bounds] = useMeasure({scroll: false});
+  const [ref, bounds] = useMeasure({ scroll: false });
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   return (
-    <ContainerWrapper>
-      <main className=" top-0 right-0 bottom-0 left-0 h-screen w-screen" ref={ref} 
-      onPointerMove={(e) => {
-        mouseX.set(e.clientX - bounds.x - bounds.width / 2);
-        mouseY.set(e.clientY - bounds.y - bounds.height / 2);
-      }}
-    >
-        <Canvas>
-          <directionalLight position={[0,0,1]} castShadow/>
-          <Sphere mouseX={mouseX} mouseY={mouseY} bounds={bounds}/>
-        </Canvas>
-      </main>
-    </ContainerWrapper>
+    <ThreeStuffBox>
+      <Canvas
+        ref={ref}
+        onPointerMove={(e) => {
+          mouseX.set(e.clientX - bounds.x - bounds.width / 2);
+          mouseY.set(e.clientY - bounds.y - bounds.height / 2);
+        }}
+      >
+        <directionalLight position={[0, 0, 1]} />
+        <Sphere mouseX={mouseX} mouseY={mouseY} bounds={bounds} />
+      </Canvas>
+    </ThreeStuffBox>
   );
 }
