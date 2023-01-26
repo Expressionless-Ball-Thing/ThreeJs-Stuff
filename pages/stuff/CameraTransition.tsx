@@ -6,22 +6,6 @@ import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import ThreeStuffBox from "../../components/layouts/stuff";
 
 export default function CameraTransition() {
-  const [isFullscreen, setFullscreen] = useState(false);
-
-  const ScreenVariants = {
-    initial: {
-      height: 200,
-      width: 200,
-    },
-    clicked: {
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
-      height: "100vh",
-      width: "100vw",
-    },
-  };
 
   return (
     <ThreeStuffBox>
