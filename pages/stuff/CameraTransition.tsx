@@ -1,22 +1,27 @@
-import { Html, OrbitControls, Text, Text3D } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { motion as motion2d } from "framer-motion";
-import { LayoutCamera, motion, MotionCanvas } from "framer-motion-3d";
-import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { motion } from "framer-motion-3d";
+import { Dispatch, SetStateAction, useLayoutEffect, useRef, useState } from "react";
 import ThreeStuffBox from "../../components/layouts/stuff";
 
 export default function CameraTransition() {
 
+  const [counter, setCounter] = useState(0);
+
   return (
     <ThreeStuffBox>
-        <Canvas className=" bg-blue-400 cursor-pointer h-full w-full absolute">
-          <Stuff />
+        <Canvas className=" bg-blue-400 cursor-pointer h-full w-full absolute" 
+          onClick={() => {
+            setCounter((count) => count + 1);
+          }}
+        >
+          <Stuff counter={counter}/>
         </Canvas>
     </ThreeStuffBox>
   );
 }
 
-function Stuff() {
+function Stuff({counter}: {counter: number}) {
   const { camera: camera, set: set, size: size } = useThree();
   const cameraRef = useRef<any>();
 
@@ -40,16 +45,30 @@ function Stuff() {
   }, [camera, cameraRef, set]);
 
   const CameraVariants = {
-    enter: {},
+    first: {
+      x: 4, y: 4, z: -4
+    },
+    second: {
+      x: 4, y: 4, z: 4
+    },
+    third: {
+      x: -4, y: 4, z: 4
+    },
+    fourth: {
+      x: -4, y: 4, z: -4
+    }
   };
 
   return (
     <>
       <Lights />
       <motion.perspectiveCamera
+        initial={false}
+        animate={["first", "second", "third", "fourth"][counter % 4]}
+        variants={CameraVariants}
         fov={90}
         ref={cameraRef}
-        position={[4, 4, -3]}
+        position={[4, 4, -4]}
       />
       <Scene1 />
     </>
