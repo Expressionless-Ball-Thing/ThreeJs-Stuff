@@ -1,29 +1,38 @@
-import { Text } from "@react-three/drei";
+import { OrbitControls, Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
-import { Dispatch, SetStateAction, useLayoutEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import ThreeStuffBox from "../../components/layouts/stuff";
 
 export default function CameraTransition() {
-
   const [counter, setCounter] = useState(0);
 
   return (
     <ThreeStuffBox>
-        <Canvas className=" bg-blue-400 cursor-pointer h-full w-full absolute" 
-          onClick={() => {
-            setCounter((count) => count + 1);
-          }}
-        >
-          <Stuff counter={counter}/>
-        </Canvas>
+      <Canvas
+        className=" bg-blue-400 cursor-pointer h-full w-full absolute"
+        onClick={() => {
+          setCounter((count) => count + 1);
+        }}
+      >
+        <Stuff counter={counter} />
+      </Canvas>
     </ThreeStuffBox>
   );
 }
 
-function Stuff({counter}: {counter: number}) {
+function Stuff({ counter }: { counter: number }) {
   const { camera: camera, set: set, size: size } = useThree();
   const cameraRef = useRef<any>();
+
+  const [moved, setMoved] = useState<Boolean>(false);
 
   //  Setup the camera's projection matrix, so the meshes don't look distorted and messed up.
   useLayoutEffect(() => {
@@ -46,17 +55,25 @@ function Stuff({counter}: {counter: number}) {
 
   const CameraVariants = {
     first: {
-      x: 4, y: 4, z: -4
+      x: 4,
+      y: 4,
+      z: -4,
     },
     second: {
-      x: 4, y: 4, z: 4
+      x: 4,
+      y: 4,
+      z: 4,
     },
     third: {
-      x: -4, y: 4, z: 4
+      x: -4,
+      y: 4,
+      z: 4,
     },
     fourth: {
-      x: -4, y: 4, z: -4
-    }
+      x: -4,
+      y: 4,
+      z: -4,
+    },
   };
 
   return (
@@ -69,15 +86,78 @@ function Stuff({counter}: {counter: number}) {
         fov={90}
         ref={cameraRef}
         position={[4, 4, -4]}
+        transition={{ duration: 1, type: "easeIn" }}
       />
-      <Scene1 />
+      <motion.group
+        initial={false}
+        animate={moved ? { x: 0, y: -50, z: 0 } : { x: 0, y: 0, z: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Scene1 position={[0, 0, 0]} setMoved={setMoved} />
+        <Scene2 position={[0, 50, 0]} setMoved={setMoved} />
+      </motion.group>
+      <OrbitControls />
     </>
   );
 }
 
-function Scene1() {
+function Scene2({
+  position = [0, 0, 0],
+  setMoved,
+}: {
+  position: number[];
+  setMoved: Dispatch<SetStateAction<Boolean>>;
+}) {
+  const box = useRef(null);
+  useEffect(() => {
+    console.log(box.current);
+  });
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime();
+
+    box.current!.position.x = Math.sin(time);
+    box.current!.position.y = Math.sin(time) + 1.7;
+    box.current!.position.z = Math.cos(time);
+  });
+
   return (
-    <group>
+    <group position={position}>
+      <mesh scale={[4, 0.2, 4]}>
+        <boxBufferGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial />
+      </mesh>
+      <mesh ref={box} position={[0, 2.5, 0]} scale={1}>
+        <boxGeometry />
+        <meshStandardMaterial color="red" />
+      </mesh>
+
+      <motion.group position={[3.3, 0, 0]} whileHover={{ scale: 1.1 }}>
+        <Text
+          rotation-x={-Math.PI / 2}
+          rotation-z={Math.PI}
+          maxWidth={1}
+          textAlign="center"
+          onClick={(e) => {
+            e.nativeEvent.stopPropagation();
+            setMoved((prev) => !prev);
+          }}
+        >
+          Click Me
+        </Text>
+      </motion.group>
+    </group>
+  );
+}
+
+function Scene1({
+  position = [0, 0, 0],
+  setMoved,
+}: {
+  position: number[];
+  setMoved: Dispatch<SetStateAction<Boolean>>;
+}) {
+  return (
+    <group position={position}>
       <mesh scale={[4, 0.2, 4]}>
         <boxBufferGeometry args={[1, 1, 1]} />
         <meshStandardMaterial />
@@ -101,6 +181,10 @@ function Scene1() {
           rotation-z={Math.PI}
           maxWidth={1}
           textAlign="center"
+          onClick={(e) => {
+            e.nativeEvent.stopPropagation();
+            setMoved((prev) => !prev);
+          }}
         >
           Click Me
         </Text>
