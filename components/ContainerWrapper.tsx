@@ -21,7 +21,7 @@ export default function ContainerWrapper({children} : {children : ReactNode}) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className=" flex justify-center flex-col px-8">
+        <div className=" flex justify-center flex-col px-8 border-b-4 border-b-gray-700 dark:border-b-gray-50">
           <nav className=" flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
             <Link
               href={"/"}
