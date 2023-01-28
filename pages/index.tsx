@@ -57,6 +57,12 @@ export default function Home() {
                 "Words displayed on the surface of a sphere, with added mouse rotate"
               }
             />
+            <CatalogCard 
+            stuffLink={"CameraTransition"} 
+            commentaryLink={"stub"} 
+            title={"Camera Transitions"} 
+            description={"Some camera transitions activated with mouse clicks."}              
+            />
           </div>
         </div>
       </motion.main>

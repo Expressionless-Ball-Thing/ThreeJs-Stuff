@@ -1,4 +1,4 @@
-import { OrbitControls, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import {
@@ -21,6 +21,7 @@ export default function CameraTransition() {
         onClick={() => {
           setCounter((count) => count + 1);
         }}
+        shadows
       >
         <Stuff counter={counter} />
       </Canvas>
@@ -96,7 +97,6 @@ function Stuff({ counter }: { counter: number }) {
         <Scene1 position={[0, 0, 0]} setMoved={setMoved} />
         <Scene2 position={[0, 50, 0]} setMoved={setMoved} />
       </motion.group>
-      <OrbitControls />
     </>
   );
 }
@@ -122,11 +122,11 @@ function Scene2({
 
   return (
     <group position={position}>
-      <mesh scale={[4, 0.2, 4]}>
+      <mesh scale={[4, 0.2, 4]} castShadow receiveShadow>
         <boxBufferGeometry args={[1, 1, 1]} />
         <meshStandardMaterial />
       </mesh>
-      <mesh ref={box} position={[0, 2.5, 0]} scale={1}>
+      <mesh ref={box} position={[0, 2.5, 0]} scale={1} castShadow receiveShadow>
         <boxGeometry />
         <meshStandardMaterial color="red" />
       </mesh>
@@ -158,19 +158,24 @@ function Scene1({
 }) {
   return (
     <group position={position}>
-      <mesh scale={[4, 0.2, 4]}>
+      <mesh scale={[4, 0.2, 4]} castShadow receiveShadow>
         <boxBufferGeometry args={[1, 1, 1]} />
         <meshStandardMaterial />
       </mesh>
-      <mesh position={[0, 0.7, 0]} scale={2}>
+      <mesh position={[0, 0.7, 0]} scale={2} castShadow receiveShadow>
         <icosahedronBufferGeometry args={[0.3, 1]} />
-        <meshStandardMaterial color="mediumpurple" />
+        <meshStandardMaterial flatShading color="mediumpurple" />
       </mesh>
-      <mesh position={[0, 1.5, 1]} scale={[2, 3, 0.1]}>
+      <mesh position={[0, 1.5, 1]} scale={[2, 3, 0.1]} castShadow receiveShadow>
         <boxBufferGeometry />
         <meshStandardMaterial color={"hotpink"} />
       </mesh>
-      <mesh position={[-1.9, 0, 0]} scale={[0.5, 4, 4]}>
+      <mesh
+        position={[-1.9, 0, 0]}
+        scale={[0.5, 4, 4]}
+        castShadow
+        receiveShadow
+      >
         <boxBufferGeometry />
         <meshStandardMaterial color={"yellow"} />
       </mesh>
@@ -201,6 +206,14 @@ function Lights() {
   return (
     <>
       <ambientLight intensity={0.2} />
+      <pointLight intensity={1.5} position={[4, 0, 0]} castShadow/>
+      <motion.directionalLight
+        position={[0, 3, 0]}
+        castShadow
+        intensity={1.5}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+      />
     </>
   );
 }
