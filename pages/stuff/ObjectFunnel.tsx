@@ -1,10 +1,8 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Physics,
   CuboidCollider,
   InstancedRigidBodies,
-  useRapier,
   InstancedRigidBodyApi
 } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
