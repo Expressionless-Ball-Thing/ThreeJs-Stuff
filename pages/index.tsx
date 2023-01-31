@@ -63,6 +63,8 @@ export default function Home() {
             title={"Camera Transitions"} 
             description={"Some camera transitions activated with mouse clicks."}              
             />
+            <CatalogCard stuffLink={"ObjectFunnel"} commentaryLink={"stub"} title={"Cube Rain"} description={"Bunch of geoemtries falling endlessly (sort of)"}            
+            />
           </div>
         </div>
       </motion.main>

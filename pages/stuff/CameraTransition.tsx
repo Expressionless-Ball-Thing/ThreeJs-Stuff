@@ -115,9 +115,9 @@ function Scene2({
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    box.current!.position.x = Math.sin(time);
-    box.current!.position.y = Math.sin(time) + 1.7;
-    box.current!.position.z = Math.cos(time);
+    (box.current! as any).position.x = Math.sin(time);
+    (box.current! as any).position.y = Math.sin(time) + 1.7;
+    (box.current! as any).position.z = Math.cos(time);
   });
 
   return (
