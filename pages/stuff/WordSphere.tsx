@@ -11,7 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { motion } from "framer-motion-3d";
-import ThreeStuffBox from "../../components/layouts/stuff";
+import ThreeStuffBox from "../../components/layouts/CanvasBox";
 
 const spring = { stiffness: 600, damping: 30 };
 

@@ -7,7 +7,7 @@ import {
 } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
 import { InstancedMesh } from "three";
-import ThreeStuffBox from "../../components/layouts/stuff";
+import ThreeStuffBox from "../../components/layouts/CanvasBox";
 
 export default function ObjectFunnel() {
   return (
