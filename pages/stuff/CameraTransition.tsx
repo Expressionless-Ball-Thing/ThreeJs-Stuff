@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
-import ThreeStuffBox from "../../components/layouts/stuff";
+import ThreeStuffBox from "../../components/layouts/CanvasBox";
 
 export default function CameraTransition() {
   const [counter, setCounter] = useState(0);

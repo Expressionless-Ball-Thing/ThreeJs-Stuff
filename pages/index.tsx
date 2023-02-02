@@ -63,7 +63,13 @@ export default function Home() {
             title={"Camera Transitions"} 
             description={"Some camera transitions activated with mouse clicks."}              
             />
-            <CatalogCard stuffLink={"ObjectFunnel"} commentaryLink={"stub"} title={"Cube Rain"} description={"Bunch of geoemtries falling endlessly (sort of)"}            
+            <CatalogCard stuffLink={"ObjectFunnel"} commentaryLink={"stub"} title={"Cube Rain"} description={"Bunch of cube falling endlessly (sort of) in a physics simulation."}            
+            />
+            <CatalogCard 
+            stuffLink={"PerlinSphere"} 
+            commentaryLink={"stub"} 
+            title={"Perlin Sphere"} 
+            description={"Sphere with Perlin Noise applied to its shader."}              
             />
           </div>
         </div>
