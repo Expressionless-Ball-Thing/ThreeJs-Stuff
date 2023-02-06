@@ -80,6 +80,12 @@ export default function Home() {
               title={"Perlin Sphere"}
               description={"Sphere with Perlin Noise applied to its shader."}
             />
+            <CatalogCard
+              stuffLink={"FlightGame"}
+              commentaryLink={"stub"}
+              title={"Simple Flight Game"}
+              description={"Simple flight game, use the mouse to determine where you fly to, and WASD to move along the camera plane."}
+            />
           </div>
         </div>
       </motion.main>

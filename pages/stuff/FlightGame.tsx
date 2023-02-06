@@ -4,7 +4,7 @@ import {
   useKeyboardControls
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { CuboidCollider, Debug, Physics, RigidBody, useRapier } from "@react-three/rapier";
+import { CuboidCollider, Debug, Physics, RigidBody, RigidBodyApi, useRapier } from "@react-three/rapier";
 import { useRef } from "react";
 import * as THREE from "three";
 import ThreeStuffBox from "../../components/layouts/CanvasBox";
@@ -68,18 +68,18 @@ function Scene() {
 
 function Player() {
   const pointControls = useRef(null);
-  const playerRef = useRef(null);
+  const playerRef = useRef<RigidBodyApi>(null);
 
   const [, getKeys] = useKeyboardControls();
 
   useFrame((state, delta) => {
-    const { forward, backward, leftward, rightward, up, down } = getKeys();
-    state.camera.position.set(...playerRef.current.translation());
+    const { forward, backward, leftward, rightward} = getKeys();
+    state.camera.position.set(...playerRef.current!.translation());
     playerRef.current!.setRotation(state.camera.quaternion);
 
-    const impulseStrength = 0.1 * delta
+    const impulseStrength = 0.05 * delta
 
-    playerRef.current.applyImpulse(state.camera.getWorldDirection(new THREE.Vector3).normalize().multiplyScalar(impulseStrength))
+    playerRef.current!.applyImpulse(state.camera.getWorldDirection(new THREE.Vector3).normalize().multiplyScalar(impulseStrength))
 
     const impulse = { x: 0, y: 0, z: 0 }
 
@@ -105,7 +105,7 @@ function Player() {
         impulse.x -= impulseStrength
     }
 
-    playerRef.current.applyImpulse(new THREE.Vector3(impulse.x, impulse.y, impulse.z).applyEuler(state.camera.rotation))
+    playerRef.current!.applyImpulse(new THREE.Vector3(impulse.x, impulse.y, impulse.z).applyEuler(state.camera.rotation))
 
   });
 
