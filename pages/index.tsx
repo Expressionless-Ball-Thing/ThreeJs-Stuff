@@ -3,19 +3,20 @@ import CatalogCard from "../components/CatalogCard";
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 100 },
-  enter: {opacity: 1, x: 0, y: 0},
-  exit: {opacity: 0, x: 0, y: 100}
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: 100 },
 };
 
 const transition = {
   type: "easeInOut",
-  duration: 0.4
-}
+  duration: 0.4,
+};
 
 export default function Home() {
   return (
     <>
-      <motion.main className="bg-gray-50 dark:bg-gray-900 flex flex-col justify-center px-8 py-6"
+      <motion.main
+        className="bg-gray-50 dark:bg-gray-900 flex flex-col justify-center px-8 py-6"
         initial="hidden"
         animate="enter"
         exit="exit"
@@ -48,7 +49,7 @@ export default function Home() {
           <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
             Catalog
           </h3>
-          <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3" >
+          <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3">
             <CatalogCard
               stuffLink={"WordSphere"}
               commentaryLink={"stub"}
@@ -57,19 +58,33 @@ export default function Home() {
                 "Words displayed on the surface of a sphere, with added mouse rotate"
               }
             />
-            <CatalogCard 
-            stuffLink={"CameraTransition"} 
-            commentaryLink={"stub"} 
-            title={"Camera Transitions"} 
-            description={"Some camera transitions activated with mouse clicks."}              
+            <CatalogCard
+              stuffLink={"CameraTransition"}
+              commentaryLink={"stub"}
+              title={"Camera Transitions"}
+              description={
+                "Some camera transitions activated with mouse clicks."
+              }
             />
-            <CatalogCard stuffLink={"ObjectFunnel"} commentaryLink={"stub"} title={"Cube Rain"} description={"Bunch of cube falling endlessly (sort of) in a physics simulation."}            
+            <CatalogCard
+              stuffLink={"ObjectFunnel"}
+              commentaryLink={"stub"}
+              title={"Cube Rain"}
+              description={
+                "Bunch of cube falling endlessly (sort of) in a physics simulation."
+              }
             />
-            <CatalogCard 
-            stuffLink={"PerlinSphere"} 
-            commentaryLink={"stub"} 
-            title={"Perlin Sphere"} 
-            description={"Sphere with Perlin Noise applied to its shader."}              
+            <CatalogCard
+              stuffLink={"PerlinSphere"}
+              commentaryLink={"stub"}
+              title={"Perlin Sphere"}
+              description={"Sphere with Perlin Noise applied to its shader."}
+            />
+            <CatalogCard
+              stuffLink={"FlightGame"}
+              commentaryLink={"stub"}
+              title={"Simple Flight Game"}
+              description={"Simple flight game, use the mouse to determine where you fly to, and WASD to move along the camera plane."}
             />
           </div>
         </div>
