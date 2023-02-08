@@ -3,7 +3,8 @@ import {
   Physics,
   CuboidCollider,
   InstancedRigidBodies,
-  InstancedRigidBodyApi
+  InstancedRigidBodyApi,
+  Vector3Array,
 } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
 import { InstancedMesh } from "three";
@@ -31,9 +32,9 @@ function Stuff() {
   const count = 100;
 
   const cubeTransforms = useMemo(() => {
-    const positions = [];
-    const rotations = [];
-    const scales = [];
+    const positions : Vector3Array[] = [];
+    const rotations : Vector3Array[] = [];
+    const scales : Vector3Array[] = [];
 
     for (let i = 0; i < count; i++) {
       positions.push([(Math.random() - 0.5) * 4, i, (Math.random() - 0.5) * 4]);
@@ -41,8 +42,8 @@ function Stuff() {
 
       const scale = 0.2 + Math.random() * 0.8;
       scales.push([scale, scale, scale]);
-    }
 
+    }
     return { positions, rotations, scales };
   }, []);
 

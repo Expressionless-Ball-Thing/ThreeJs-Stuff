@@ -41,7 +41,7 @@ export default function Home() {
             <div className="flex flex-row w-full color">
               <div className="flex-grow-[1] p-2 font-semibold">Stack:</div>
               <div className="flex-grow-[3] p-2">
-                React, Framer Motion, ThreeJs, TailwindCSS
+                NextJs, Framer Motion, ThreeJs, TailwindCSS
               </div>
             </div>
           </div>

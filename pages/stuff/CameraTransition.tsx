@@ -9,6 +9,8 @@ import {
   useRef,
   useState,
 } from "react";
+import * as THREE from "three"
+import { Vector3 } from "three";
 import ThreeStuffBox from "../../components/layouts/CanvasBox";
 
 export default function CameraTransition() {
@@ -94,18 +96,18 @@ function Stuff({ counter }: { counter: number }) {
         animate={moved ? { x: 0, y: -50, z: 0 } : { x: 0, y: 0, z: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Scene1 position={[0, 0, 0]} setMoved={setMoved} />
-        <Scene2 position={[0, 50, 0]} setMoved={setMoved} />
+        <Scene1 position={new THREE.Vector3(0, 0, 0)} setMoved={setMoved} />
+        <Scene2 position={new THREE.Vector3(0, 50, 0)} setMoved={setMoved} />
       </motion.group>
     </>
   );
 }
 
 function Scene2({
-  position = [0, 0, 0],
+  position = new THREE.Vector3(0,0,0),
   setMoved,
 }: {
-  position: number[];
+  position: Vector3;
   setMoved: Dispatch<SetStateAction<Boolean>>;
 }) {
   const box = useRef(null);
@@ -150,10 +152,10 @@ function Scene2({
 }
 
 function Scene1({
-  position = [0, 0, 0],
+  position = new THREE.Vector3(0,0,0),
   setMoved,
 }: {
-  position: number[];
+  position: Vector3;
   setMoved: Dispatch<SetStateAction<Boolean>>;
 }) {
   return (

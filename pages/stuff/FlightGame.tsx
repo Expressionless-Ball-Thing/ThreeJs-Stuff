@@ -74,7 +74,7 @@ function Player() {
 
   useFrame((state, delta) => {
     const { forward, backward, leftward, rightward} = getKeys();
-    state.camera.position.set(...playerRef.current!.translation());
+    state.camera.position.set(...playerRef.current!.translation().toArray());
     playerRef.current!.setRotation(state.camera.quaternion);
 
     const impulseStrength = 0.05 * delta
@@ -112,7 +112,6 @@ function Player() {
   return (
     <>
       <PointerLockControls ref={pointControls} maxPolarAngle={Math.PI * 2} />
-      <Debug />
       <RigidBody ref={playerRef} colliders={false} linearDamping={0.5} restitution={2}>
         <CuboidCollider args={[0.1, 0.1, 0.1]} />
       </RigidBody>
