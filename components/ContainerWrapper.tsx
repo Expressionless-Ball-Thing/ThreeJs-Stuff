@@ -46,10 +46,10 @@ export default function ContainerWrapper({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <div className=" flex justify-center flex-col px-8 border-b-4 border-b-gray-700 dark:border-b-gray-50">
-        <nav className=" flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
+        <nav className=" flex items-center justify-between w-full max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
           <Link
             href={"/"}
-            className="font-semibold text-gray-800 dark:text-gray-200 hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all"
+            className="font-semibold text-gray-800 dark:text-gray-200 md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all"
           >
             <span>ThreeJs Stuff</span>
           </Link>
