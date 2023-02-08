@@ -49,7 +49,7 @@ export default function Home() {
           <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
             Catalog
           </h3>
-          <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-3 gap-5">
             <CatalogCard
               stuffLink={"TextSphere"}
               commentaryLink={"stub"}
