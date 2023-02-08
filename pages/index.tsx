@@ -53,9 +53,9 @@ export default function Home() {
             <CatalogCard
               stuffLink={"WordSphere"}
               commentaryLink={"stub"}
-              title={"Words Sphere"}
+              title={"Text Sphere"}
               description={
-                "Words displayed on the surface of a sphere, with added mouse rotate"
+                "Text displayed on the surface of a sphere, with added mouse rotate."
               }
             />
             <CatalogCard
@@ -71,7 +71,7 @@ export default function Home() {
               commentaryLink={"stub"}
               title={"Cube Rain"}
               description={
-                "Bunch of cube falling endlessly (sort of) in a physics simulation."
+                "Bunch of cubes falling endlessly (sort of) in a physics simulation."
               }
             />
             <CatalogCard
