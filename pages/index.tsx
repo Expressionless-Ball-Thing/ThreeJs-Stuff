@@ -51,7 +51,7 @@ export default function Home() {
           </h3>
           <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-3">
             <CatalogCard
-              stuffLink={"WordSphere"}
+              stuffLink={"TextSphere"}
               commentaryLink={"stub"}
               title={"Text Sphere"}
               description={
